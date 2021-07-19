@@ -62,15 +62,14 @@ var getBoard = function(board_type) {
 	} else if(board_type==-1)
 	{
 		
-		board = "<button type='button' id = NoCardButton class = '' onclick = shufflecards()>No Card</button>"
 		board += "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 
-			board += "\
-			<div class = square>\
+			board += "<div class = square>\
 			<div class = 'flip-card'>\
 			<input type='image' id = " + i + " class = 'card_image select-button front' src='images/chosen.png'>\
 			<input type='image' id = " + i + " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)>\
+			</div>\
 			</div>"
 
 
