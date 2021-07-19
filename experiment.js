@@ -63,16 +63,16 @@ var getBoard = function(board_type) {
 	{
 		
 		board = "<button type='button' id = NoCardButton class = '' onclick = shufflecards()>No Card</button>"
-		board += "<div class = cardbox id='grid-demo'>"
+		board += "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 
-			
-			board += "<div class = square>\
+			board += "\
+			<div class = square>\
 			<div class = 'flip-card'>\
 			<input type='image' id = " + i + " class = 'card_image select-button front' src='images/chosen.png'>\
 			<input type='image' id = " + i + " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)>\
-			</div>\
 			</div>"
+
 
 
 			/*
@@ -149,13 +149,9 @@ var endRound = function() {
 var shufflecards = function(){
 		
 		  $('#grid-demo').rdmGrid({
-			  animationSpeed: 350,
-			  breakPoint:   600,
-			  btns:    'rg_btn',
+		
 			  columns:      8,
-			  fadeInSpeed:  350,
-			  initialShuffle:true,
-			  responsive:  false
+
 			});
 			
 		  console.log("Cazzo");

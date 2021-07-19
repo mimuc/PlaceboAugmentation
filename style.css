@@ -266,3 +266,23 @@ background-color: blue;
 #instructButton {
   width: 100%;
 }
+
+.grid>* { padding: 10px }
+
+.rg_item {
+  border: 1px solid #555;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: 1px 1px 6px 0 black;
+  
+}
+
+.rg_item-img {
+  height: auto;
+  width: 100%;
+  height: 100px;
+  
+}
+
+
+.rg_item-content { padding: 10px }
