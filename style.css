@@ -96,7 +96,7 @@
    backface-visibility: hidden;
 }
 
-.square .front{
+.square .back{
   transform: rotateY(180deg);
 }
 
@@ -113,7 +113,7 @@
 
 }
 
-.square:hover .flip-card{
+.square.flipped .flip-card{
   transform: rotateY(-180deg);
 }
 

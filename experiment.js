@@ -6,6 +6,8 @@ var getInstructFeedback = function() {
 		'</p></div>'
 }
 
+
+
 function assessPerformance() {
 	var experiment_data = jsPsych.data.getTrialsOfType('single-stim-button')
 	var missed_count = 0
@@ -67,8 +69,8 @@ var getBoard = function(board_type) {
 
 			board += "<div class = square>\
 			<div class = 'flip-card'>\
-			<input type='image' id = " + i + " class = 'card_image select-button front' src='images/chosen.png'>\
-			<input type='image' id = " + i + " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)>\
+			<input type='image' id = " + (i+32) + " class = 'card_image select-button' src='images/chosen.png'>\
+			<input type='image' id = " + i + " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)>\
 			</div>\
 			</div>"
 
@@ -145,16 +147,6 @@ var endRound = function() {
 
 
 
-var shufflecards = function(){
-		
-		  $('#grid-demo').rdmGrid({
-		
-			  columns:      8,
-
-			});
-			
-		  console.log("Cazzo");
-}
 
 // Clickable card function during test
 var chooseCard = function(clicked_id) {
@@ -268,12 +260,30 @@ var getRound = function() {
 	}
 }
 
-document.onload = function() {
-	$('#grid-demo').rdmGrid()
-}
 
 var getPreRound = function() {
 	var gameState = PregameSetup
+
+	setTimeout(function() {
+		var items  = document.getElementsByClassName('square')
+		for (var i=0; i< items.length; i++){
+			items[i].classList.add('flipped');
+			
+		}
+		
+	},500)
+
+	setTimeout(function() {
+		var cardcontainer = document.getElementsByClassName('cardbox')[0]
+		console.log(cardcontainer);
+		for (var i = cardcontainer.children.length; i >= 0; i--) {
+			cardcontainer.appendChild(cardcontainer.children[Math.random() * i | 0]);
+		}
+		
+	},1000)
+
+
+
 	return gameState
 }
 
