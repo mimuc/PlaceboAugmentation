@@ -73,7 +73,7 @@
 
 .square {
    float:left;
-   position: relative;
+   position: absolute;
    width:10%;
    height: 6vw;
    padding-bottom : 0%; /* = width for a 1:1 aspect ratio */
@@ -82,9 +82,11 @@
    color: #fff;
 
   
-   display: inline-block;
+  display: inline-block;
   background: transparent;
   perspective: 1000px;
+
+  transition: all 300ms linear;
 
 }
 

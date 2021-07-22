@@ -63,11 +63,12 @@ var getBoard = function(board_type) {
 
 	} else if(board_type==-1)
 	{
-		
-		board += "<div class = cardbox>"
+	
+		board = "<div class = cardbox>"
 		for (i = 1; i < 33; i++) {
 
-			board += "<div class = square>\
+			var estilo =  "'top:"+cardPositions[i-1][0]+"vw; left:"+cardPositions[i-1][1]+"vw;'";
+			board += "<div class = square style =" + estilo +  ">\
 			<div class = 'flip-card'>\
 			<input type='image' id = " + (i+32) + " class = 'card_image select-button' src='images/chosen.png'>\
 			<input type='image' id = " + i + " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)>\
@@ -263,6 +264,7 @@ var getRound = function() {
 
 var getPreRound = function() {
 	var gameState = PregameSetup
+	var gridForLoop = $('#grid-demo').rdmGrid();
 
 	setTimeout(function() {
 		var items  = document.getElementsByClassName('square')
@@ -273,19 +275,56 @@ var getPreRound = function() {
 		
 	},500)
 
-	setTimeout(function() {
+
+	setTimeout(function(){
+
+	setIntervalX(function() {
+
+		shuffleArray(cardPositions) 
 		var cardcontainer = document.getElementsByClassName('cardbox')[0]
-		console.log(cardcontainer);
-		for (var i = cardcontainer.children.length; i >= 0; i--) {
-			cardcontainer.appendChild(cardcontainer.children[Math.random() * i | 0]);
+		
+		for (var i = 0; i<cardcontainer.children.length; i++) {
+			console.log(cardcontainer.children[i])
+			cardcontainer.children[i].style.top = cardPositions[i][0]+'vw'
+			cardcontainer.children[i].style.left = cardPositions[i][1]+'vw'	
 		}
 		
-	},1000)
+	},200,5)
+
+}, 1000)
 
 
+
+
+	
+	
 
 	return gameState
 }
+
+
+function shuffleArray(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+}
+
+
+function setIntervalX(callback, delay, repetitions) {
+    var x = 0;
+    var intervalID = window.setInterval(function () {
+
+       callback();
+
+       if (++x === repetitions) {
+           window.clearInterval(intervalID);
+       }
+    }, delay);
+}
+
 
 /*Functions below are for practice
 */
@@ -530,6 +569,20 @@ for (var i = 0; i < numLossRounds; i++) {
 	var insert = [paramsArray[Math.floor(Math.random()*8)]]
 	shuffledParamsArray = before.concat(insert,after)
 }
+
+
+cardPositions = Array();
+for (i = 1; i < 33; i++) {
+	var columns = 8;
+	var row = Math.floor((i-1)/8);
+	var col = (i-1)-row*columns;
+	var hspace = 6;
+	var vspace = 6.5;
+	cardPositions[i-1] = Array( row*vspace, col*hspace)
+}
+
+console.log(cardPositions)
+
 
 var gameSetup =
 	"<div class = cct-box>"+
