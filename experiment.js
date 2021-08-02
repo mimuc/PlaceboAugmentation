@@ -33,25 +33,25 @@ function assessPerformance() {
   credit_var = missed_percent < 0.4 && avg_rt > 200;
   jsPsych.data.addDataToLastTrial({
     credit_var: credit_var,
-    performance_var: performance_var,
+    performance_var: performance_var
   });
 }
 
 function deleteText(input, search_term) {
-  console.log("Tried to Delete "+ search_term)
+
   index = input.indexOf(search_term);
   indexAfter = input.indexOf(search_term) + search_term.length;
   return input.slice(0, index) + input.slice(indexAfter);
 }
 
 function appendTextAfter(input, search_term, new_text) {
-  console.log("Tried to replace "+ search_term)
+
   var index = input.indexOf(search_term) + search_term.length;
   return input.slice(0, index) + new_text + input.slice(index);
 }
 
 function appendTextAfter2(input, search_term, new_text, deleted_text) {
-	console.log("Tried to replace "+ search_term + " With "+ new_text)
+
   var index = input.indexOf(search_term) + search_term.length;
   var indexAfter = index + deleted_text.length;
   return input.slice(0, index) + new_text + input.slice(indexAfter);
@@ -77,7 +77,9 @@ var getBoard = function (board_type) {
         cardPositions[i - 1][1] +
         "vw;'";
       board +=
-        "<div  id = SQ" +(i)+" class ='square flipped' style = " +
+        "<div  id = SQ" +
+        i +
+        " class ='square flipped' style = " +
         estilo +
         ">\
 			<div class = 'flip-card'>\
@@ -91,7 +93,6 @@ var getBoard = function (board_type) {
 			</div>";
     }
   } else {
-
     board = "<div class = cardbox>";
 
     for (i = 1; i < 33; i++) {
@@ -101,9 +102,9 @@ var getBoard = function (board_type) {
         "vw; left:" +
         cardPositions[i - 1][1] +
         "vw;'";
-      
+
       board +=
-       "<div class = square style =" +
+        "<div class = square style =" +
         estilo +
         ">\
         <input type='image' id = " +
@@ -144,7 +145,7 @@ var appendTestData = function () {
     loss_amount: lossAmt,
     round_points: roundPoints,
     clicked_on_loss_card: lossClicked,
-    round_type: round_type,
+    round_type: round_type
   });
 };
 
@@ -207,14 +208,14 @@ var chooseCard = function (clicked_id) {
 
 var getRound = function () {
   var gameState = gameSetup;
-  console.log("Roundover "+roundOver); 
+
   if (roundOver === 0) {
     //this is for the start of a round
     whichClickInRound = 0;
     unclickedCards = cardArray;
     cardArray = [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-      22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+      22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
     ];
     clickedGainCards = []; //num
     clickedLossCards = []; //num
@@ -352,15 +353,14 @@ var getRound = function () {
 var getPreRound = function () {
   var gameState = PregameSetup;
   //*
-  console.log("Roundover "+roundOver);
+
   if (roundOver === 0) {
-	  
     //this is for the start of a round
     whichClickInRound = 0;
     unclickedCards = cardArray;
     cardArray = [
       1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-      22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+      22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
     ];
     clickedGainCards = []; //num
     clickedLossCards = []; //num
@@ -385,7 +385,6 @@ var getPreRound = function () {
     gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
     gameState = appendTextAfter(gameState, "endRound()", " disabled");
     roundOver = 1;
-	
   } else if (roundOver == 1) {
     //this is for during the round
     gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
@@ -409,17 +408,14 @@ var getPreRound = function () {
       " ' disabled",
       "select-button' onclick = noCard()"
     );
-    
-    for (i = 0; i < clickedGainCards.length; i++) {
 
-  gameState = appendTextAfter2(
-      gameState,
-      "id = " + "" + clickedGainCards[i] + "",
-      " class = 'card_image back' src='images/chosen.png'",
-      " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)"
-    );
-  
-    
+    for (i = 0; i < clickedGainCards.length; i++) {
+      gameState = appendTextAfter2(
+        gameState,
+        "id = " + "" + clickedGainCards[i] + "",
+        " class = 'card_image back' src='images/chosen.png'",
+        " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)"
+      );
     }
     return gameState;
   } else if (roundOver == 2) {
@@ -500,30 +496,25 @@ var getPreRound = function () {
   //*/
   ///////////////////////////////////////////////////////////////////
 
-  function randomInts(quantity, max){
-    const arr = []
-    while(arr.length < quantity){
-      var candidateInt = Math.floor(Math.random() * max) + 1
-      if(arr.indexOf(candidateInt) === -1) arr.push(candidateInt)
+  function randomInts(quantity, max) {
+    const arr = [];
+    while (arr.length < quantity) {
+      var candidateInt = Math.floor(Math.random() * max) + 1;
+      if (arr.indexOf(candidateInt) === -1) arr.push(candidateInt);
     }
-  return(arr)
+    return arr;
   }
 
-
   setTimeout(function () {
-    var lossflips = randomInts(numLossCards, 31)
+    var lossflips = randomInts(numLossCards, 31);
     for (var i = 1; i < 33; i++) {
-  
-        var carta = document.getElementById('F'+i);
-        if(lossflips.indexOf(i)!=-1){
-          carta.src = "images/loss.png"
-        }else
-        {
-          carta.src = "images/chosen.png"
+      var carta = document.getElementById("F" + i);
+      if (lossflips.indexOf(i) != -1) {
+        carta.src = "images/loss.png";
+      } else {
+        carta.src = "images/chosen.png";
       }
-        
-        console.log(carta.src)
-      //console.log(cardcontainer.children[i].children[0]) ;
+
     }
 
     var items = document.getElementsByClassName("square");
@@ -539,23 +530,19 @@ var getPreRound = function () {
     }
 
     for (var i = 1; i < 33; i++) {
-      var carta = document.getElementById('F'+i);
-        carta.src = "images/beforechosen.png"
-      }
-
-
-
+      var carta = document.getElementById("F" + i);
+      carta.src = "images/beforechosen.png";
+    }
   }, 500);
 
   setTimeout(function () {
-    var shuffled = cardPositions.slice()
+    var shuffled = cardPositions.slice();
     setIntervalX(
       function () {
         shuffleArray(shuffled);
         var cardcontainer = document.getElementsByClassName("cardbox")[0];
 
         for (var i = 0; i < cardcontainer.children.length; i++) {
-  
           cardcontainer.children[i].style.top = shuffled[i][0] + "vw";
           cardcontainer.children[i].style.left = shuffled[i][1] + "vw";
         }
@@ -564,20 +551,15 @@ var getPreRound = function () {
       5
     );
 
-    setTimeout(
-      function () {
-        var cardcontainer = document.getElementsByClassName("cardbox")[0];
-  
-        for (var i = 0; i < cardcontainer.children.length; i++) {
-  
-          cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
-          cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
-        }
-      },
-      1000
-    );
-  }, 1000);
+    setTimeout(function () {
+      var cardcontainer = document.getElementsByClassName("cardbox")[0];
 
+      for (var i = 0; i < cardcontainer.children.length; i++) {
+        cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
+        cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
+      }
+    }, 1000);
+  }, 1000);
 
   //////////////////////////////////////////////////////
   /* 
@@ -644,7 +626,7 @@ var getPractice1 = function () {
   unclickedCards = cardArray;
   cardArray = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
   ];
   clickedGainCards = [];
   clickedLossCards = [];
@@ -666,7 +648,7 @@ var getPractice2 = function () {
   unclickedCards = cardArray;
   cardArray = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32
   ];
   clickedGainCards = []; //num
   clickedLossCards = []; //num
@@ -749,7 +731,7 @@ var instructFunction2 = function () {
   $("#instructButton").prop("disabled", true);
   var tempArray = [
     3, 5, 6, 7, 9, 10, 11, 12, 19, 14, 15, 16, 17, 18, 20, 21, 22, 23, 24, 25,
-    26, 27, 28, 29, 31, 32,
+    26, 27, 28, 29, 31, 32
   ];
   var instructTurnCards = function () {
     document.getElementById("8").src = "images/loss.png";
@@ -819,7 +801,7 @@ var numRounds = numWinRounds + numLossRounds;
 var lossRounds = jsPsych.randomization
   .shuffle([
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-    23, 24, 25, 26, 27, 28,
+    23, 24, 25, 26, 27, 28
   ])
   .slice(0, numLossRounds);
 var riggedLossCards = [];
@@ -850,12 +832,12 @@ var paramsArray = [
   [3, 10, 250],
   [3, 10, 750],
   [3, 30, 250],
-  [3, 30, 750],
+  [3, 30, 750]
 ];
 
 var cardArray = [
   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+  23, 24, 25, 26, 27, 28, 29, 30, 31, 32
 ];
 var shuffledCardArray = jsPsych.randomization.repeat(cardArray, 1);
 var shuffledParamsArray = jsPsych.randomization.repeat(
@@ -879,7 +861,6 @@ for (i = 1; i < 33; i++) {
   var vspace = 6.5;
   cardPositions[i - 1] = Array(row * vspace, col * hspace);
 }
-
 
 var gameSetup =
   "<div class = cct-box>" +
@@ -916,14 +897,14 @@ var practiceSetup2 =
 var post_task_block = {
   type: "survey-text",
   data: {
-    trial_id: "post task questions",
+    trial_id: "post task questions"
   },
   questions: [
     '<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-    '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>',
+    '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'
   ],
   rows: [15, 15],
-  columns: [60, 60],
+  columns: [60, 60]
 };
 
 /* define static blocks */
@@ -934,11 +915,11 @@ var feedback_instruct_block = {
   type: "poldrack-text",
   cont_key: [13],
   data: {
-    trial_id: "instruction",
+    trial_id: "instruction"
   },
   text: getInstructFeedback,
   timing_post_trial: 0,
-  timing_response: 180000,
+  timing_response: 180000
 };
 /// This ensures that the subject does not read through the instructions too quickly.  If they do it too quickly, then we will go over the loop again.
 var instructions_block = {
@@ -981,11 +962,11 @@ var instructions_block = {
       "<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>" +
       "<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div></div>" +
       getBoard(2),
-    "<div class = centerbox><p class = block-text>After you end the instructions you will complete two practice rounds before proceeding. Please make sure you understand the examples on the last two pages before ending the instructions.</p></div>",
+    "<div class = centerbox><p class = block-text>After you end the instructions you will complete two practice rounds before proceeding. Please make sure you understand the examples on the last two pages before ending the instructions.</p></div>"
   ],
   allow_keys: false,
   show_clickable_nav: true,
-  timing_post_trial: 1000,
+  timing_post_trial: 1000
 };
 
 var instruction_node = {
@@ -1007,25 +988,25 @@ var instruction_node = {
         "Done with instructions. Press <strong>enter</strong> to continue.";
       return false;
     }
-  },
+  }
 };
 
 var end_block = {
   type: "poldrack-text",
   data: {
     trial_id: "end",
-    exp_id: "columbia_card_task_hot",
+    exp_id: "columbia_card_task_hot"
   },
   text: "<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>",
   cont_key: [13],
   timing_post_trial: 0,
-  on_finish: assessPerformance,
+  on_finish: assessPerformance
 };
 
 var start_test_block = {
   type: "poldrack-text",
   data: {
-    trial_id: "test_intro",
+    trial_id: "test_intro"
   },
   text: "<div class = centerbox><p class = center-block-text>We will now start the test. Press <strong>enter</strong> to begin.</p></div>",
   cont_key: [13],
@@ -1033,7 +1014,7 @@ var start_test_block = {
   on_finish: function () {
     whichClickInRound = 0;
     whichLossCards = [riggedLossCards.shift()];
-  },
+  }
 };
 
 var practice_block1 = {
@@ -1043,7 +1024,7 @@ var practice_block1 = {
   is_html: true,
   data: {
     trial_id: "stim",
-    exp_stage: "practice",
+    exp_stage: "practice"
   },
   timing_post_trial: 0,
   response_ends_trial: true,
@@ -1052,10 +1033,10 @@ var practice_block1 = {
       num_loss_cards: numLossCards,
       gain_amount: gainAmt,
       loss_amount: lossAmt,
-      instruct_points: instructPoints,
+      instruct_points: instructPoints
     });
     instructPoints = 0;
-  },
+  }
 };
 
 var practice_block2 = {
@@ -1065,7 +1046,7 @@ var practice_block2 = {
   is_html: true,
   data: {
     trial_id: "stim",
-    exp_stage: "practice",
+    exp_stage: "practice"
   },
   timing_post_trial: 0,
   response_ends_trial: true,
@@ -1074,10 +1055,10 @@ var practice_block2 = {
       num_loss_cards: numLossCards,
       gain_amount: gainAmt,
       loss_amount: lossAmt,
-      instruct_points: instructPoints,
+      instruct_points: instructPoints
     });
     instructPoints = 0;
-  },
+  }
 };
 
 var test_block = {
@@ -1087,11 +1068,11 @@ var test_block = {
   is_html: true,
   data: {
     trial_id: "stim",
-    exp_stage: "test",
+    exp_stage: "test"
   },
   timing_post_trial: 0,
   on_finish: appendTestData,
-  response_ends_trial: true,
+  response_ends_trial: true
 };
 
 var pre_test_block = {
@@ -1101,12 +1082,12 @@ var pre_test_block = {
   is_html: true,
   data: {
     trial_id: "pre_stim",
-    exp_stage: "test",
+    exp_stage: "test"
   },
   timing_post_trial: 0,
- // timing_response: 0,
+  // timing_response: 0,
   on_finish: appendTestData,
-  response_ends_trial: true,
+  response_ends_trial: true
 };
 
 var test_node = {
@@ -1128,7 +1109,7 @@ var test_node = {
     } else {
       return true;
     }
-  },
+  }
 };
 
 var pre_test_node = {
@@ -1150,24 +1131,24 @@ var pre_test_node = {
     } else {
       return true;
     }
-  },
+  }
 };
 
 var payout_text = {
   type: "poldrack-text",
   text: getText,
   data: {
-    trial_id: "reward",
+    trial_id: "reward"
   },
   cont_key: [13],
   timing_post_trial: 1000,
-  on_finish: appendPayoutData,
+  on_finish: appendPayoutData
 };
 
 var payoutTrial = {
   type: "call-function",
   data: {
-    trial_id: "calculate reward",
+    trial_id: "calculate reward"
   },
   func: function () {
     totalPoints = math.sum(roundPointsArray);
@@ -1176,7 +1157,7 @@ var payoutTrial = {
     prize2 = randomRoundPointsArray.pop();
     prize3 = randomRoundPointsArray.pop();
     performance_var = prize1 + prize2 + prize3;
-  },
+  }
 };
 
 /* create experiment definition array */
@@ -1188,8 +1169,8 @@ var columbia_card_task_hot_experiment = [];
 
 //columbia_card_task_hot_experiment.push(start_test_block);
 for (i = 0; i < numRounds; i++) {
- columbia_card_task_hot_experiment.push(pre_test_node);
- //columbia_card_task_hot_experiment.push(test_node);
+  columbia_card_task_hot_experiment.push(pre_test_node);
+  //columbia_card_task_hot_experiment.push(test_node);
 }
 
 columbia_card_task_hot_experiment.push(payoutTrial);
