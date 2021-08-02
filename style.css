@@ -96,6 +96,7 @@
 
 .square .back {
   transform: rotateY(180deg);
+  z-index: 1;
 }
 
 .flip-card {

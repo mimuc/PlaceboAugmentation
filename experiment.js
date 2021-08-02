@@ -38,17 +38,20 @@ function assessPerformance() {
 }
 
 function deleteText(input, search_term) {
+  console.log("Tried to Delete "+ search_term)
   index = input.indexOf(search_term);
   indexAfter = input.indexOf(search_term) + search_term.length;
   return input.slice(0, index) + input.slice(indexAfter);
 }
 
 function appendTextAfter(input, search_term, new_text) {
+  console.log("Tried to replace "+ search_term)
   var index = input.indexOf(search_term) + search_term.length;
   return input.slice(0, index) + new_text + input.slice(index);
 }
 
 function appendTextAfter2(input, search_term, new_text, deleted_text) {
+	console.log("Tried to replace "+ search_term + " With "+ new_text)
   var index = input.indexOf(search_term) + search_term.length;
   var indexAfter = index + deleted_text.length;
   return input.slice(0, index) + new_text + input.slice(indexAfter);
@@ -74,13 +77,13 @@ var getBoard = function (board_type) {
         cardPositions[i - 1][1] +
         "vw;'";
       board +=
-        "<div class = square style =" +
+        "<div  id = SQ" +(i)+" class ='square flipped' style = " +
         estilo +
         ">\
 			<div class = 'flip-card'>\
-			<input type='image' id = " +
-        (i + 32) +
-        " class = 'card_image select-button' src='images/chosen.png'>\
+			<input type='image' id = F" +
+        i +
+        " class = 'card_image' src='images/beforeChosen.png'>\
 			<input type='image' id = " +
         i +
         " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)>\
@@ -88,10 +91,22 @@ var getBoard = function (board_type) {
 			</div>";
     }
   } else {
+
     board = "<div class = cardbox>";
+
     for (i = 1; i < 33; i++) {
+      var estilo =
+        "'top:" +
+        cardPositions[i - 1][0] +
+        "vw; left:" +
+        cardPositions[i - 1][1] +
+        "vw;'";
+      
       board +=
-        "<div class = square><input type='image' id = " +
+       "<div class = square style =" +
+        estilo +
+        ">\
+        <input type='image' id = " +
         i +
         " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)></div>";
     }
@@ -192,6 +207,7 @@ var chooseCard = function (clicked_id) {
 
 var getRound = function () {
   var gameState = gameSetup;
+  console.log("Roundover "+roundOver); 
   if (roundOver === 0) {
     //this is for the start of a round
     whichClickInRound = 0;
@@ -336,8 +352,9 @@ var getRound = function () {
 var getPreRound = function () {
   var gameState = PregameSetup;
   //*
-
+  console.log("Roundover "+roundOver);
   if (roundOver === 0) {
+	  
     //this is for the start of a round
     whichClickInRound = 0;
     unclickedCards = cardArray;
@@ -368,74 +385,205 @@ var getPreRound = function () {
     gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
     gameState = appendTextAfter(gameState, "endRound()", " disabled");
     roundOver = 1;
+	
+  } else if (roundOver == 1) {
+    //this is for during the round
+    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
+    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter2(
+      gameState,
+      "Current Round Points: ",
+      roundPoints,
+      "0"
+    );
+    gameState = appendTextAfter(
+      gameState,
+      "Number of Loss Cards: ",
+      numLossCards
+    );
+    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "noCard()", " disabled");
+    gameState = appendTextAfter2(
+      gameState,
+      "class = 'CCT-btn ",
+      " ' disabled",
+      "select-button' onclick = noCard()"
+    );
+    
+    for (i = 0; i < clickedGainCards.length; i++) {
+
+  gameState = appendTextAfter2(
+      gameState,
+      "id = " + "" + clickedGainCards[i] + "",
+      " class = 'card_image back' src='images/chosen.png'",
+      " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)"
+    );
+  
+    
+    }
+    return gameState;
+  } else if (roundOver == 2) {
+    //this is for end the round
+    roundOver = 3;
+    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
+    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter2(
+      gameState,
+      "Current Round Points: ",
+      roundPoints,
+      "0"
+    );
+    gameState = appendTextAfter(
+      gameState,
+      "Number of Loss Cards: ",
+      numLossCards
+    );
+    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter2(
+      gameState,
+      "id = collectButton class = 'CCT-btn",
+      " select-button' onclick = collect()",
+      "'"
+    );
+    gameState = appendTextAfter(gameState, "endRound()", " disabled");
+    gameState = appendTextAfter(gameState, "noCard()", " disabled");
+
+    clickedCards = clickedGainCards.concat(clickedLossCards);
+    var notClicked = cardArray.filter(function (x) {
+      return jQuery.inArray(x, clickedCards) == -1;
+    });
+    notClicked = jsPsych.randomization.shuffle(notClicked);
+    lossCardsToTurn = notClicked.slice(
+      0,
+      numLossCards - clickedLossCards.length
+    );
+    gainCardsToTurn = notClicked.slice(numLossCards - clickedLossCards.length);
+    for (var i = 1; i < cardArray.length + 1; i++) {
+      if (clickedGainCards.indexOf(i) != -1) {
+        gameState = appendTextAfter2(
+          gameState,
+          "id = " + "" + i + "",
+          " class = 'card_image back' src='images/chosen.png'",
+          " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)"
+        );
+      } else if (clickedLossCards.indexOf(i) != -1) {
+        gameState = appendTextAfter2(
+          gameState,
+          "id = " + "" + i + "",
+          " class = 'card_image back' src='images/loss.png'",
+          " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)"
+        );
+      } else {
+        gameState = appendTextAfter2(
+          gameState,
+          "id = " + "" + i + "",
+          " class = 'card_image back' src='images/beforeChosen.png'",
+          " class = 'card_image select-button back' src='images/beforeChosen.png' onclick = chooseCard(this.id)"
+        );
+      }
+    }
+
+    setTimeout(function () {
+      for (var k = 0; k < lossCardsToTurn.length; k++) {
+        document.getElementById("" + lossCardsToTurn[k] + "").src =
+          "images/loss.png";
+      }
+      for (var j = 0; j < gainCardsToTurn.length; j++) {
+        document.getElementById("" + gainCardsToTurn[j] + "").src =
+          "images/chosen.png";
+      }
+      $("#collectButton").prop("disabled", false);
+    }, 1500);
+
+    return gameState;
   }
   //*/
   ///////////////////////////////////////////////////////////////////
+
+  function randomInts(quantity, max){
+    const arr = []
+    while(arr.length < quantity){
+      var candidateInt = Math.floor(Math.random() * max) + 1
+      if(arr.indexOf(candidateInt) === -1) arr.push(candidateInt)
+    }
+  return(arr)
+  }
+
+
+  setTimeout(function () {
+    var lossflips = randomInts(numLossCards, 31)
+    for (var i = 1; i < 33; i++) {
+  
+        var carta = document.getElementById('F'+i);
+        if(lossflips.indexOf(i)!=-1){
+          carta.src = "images/loss.png"
+        }else
+        {
+          carta.src = "images/chosen.png"
+      }
+        
+        console.log(carta.src)
+      //console.log(cardcontainer.children[i].children[0]) ;
+    }
+
+    var items = document.getElementsByClassName("square");
+    for (var i = 0; i < items.length; i++) {
+      items[i].classList.remove("flipped");
+    }
+  }, 000);
 
   setTimeout(function () {
     var items = document.getElementsByClassName("square");
     for (var i = 0; i < items.length; i++) {
       items[i].classList.add("flipped");
     }
+
+    for (var i = 1; i < 33; i++) {
+      var carta = document.getElementById('F'+i);
+        carta.src = "images/beforechosen.png"
+      }
+
+
+
   }, 500);
 
   setTimeout(function () {
+    var shuffled = cardPositions.slice()
     setIntervalX(
       function () {
-        shuffleArray(cardPositions);
+        shuffleArray(shuffled);
         var cardcontainer = document.getElementsByClassName("cardbox")[0];
 
         for (var i = 0; i < cardcontainer.children.length; i++) {
-          console.log(cardcontainer.children[i]);
-          cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
-          cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
+  
+          cardcontainer.children[i].style.top = shuffled[i][0] + "vw";
+          cardcontainer.children[i].style.left = shuffled[i][1] + "vw";
         }
       },
       200,
       5
     );
+
+    setTimeout(
+      function () {
+        var cardcontainer = document.getElementsByClassName("cardbox")[0];
+  
+        for (var i = 0; i < cardcontainer.children.length; i++) {
+  
+          cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
+          cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
+        }
+      },
+      1000
+    );
   }, 1000);
+
 
   //////////////////////////////////////////////////////
   /* 
-	return gameState
-}  else if (roundOver == 2) { //this is for end the round
-	roundOver = 3
-	gameState = appendTextAfter(gameState, 'Game Round: ', whichRound)
-	gameState = appendTextAfter(gameState, 'Loss Amount: ', lossAmt)
-	gameState = appendTextAfter2(gameState, 'Current Round Points: ', roundPoints, '0')
-	gameState = appendTextAfter(gameState, 'Number of Loss Cards: ', numLossCards)
-	gameState = appendTextAfter(gameState, 'Gain Amount: ', gainAmt)
-	gameState = appendTextAfter2(gameState, "id = collectButton class = 'CCT-btn", " select-button' onclick = collect()", "'")
-	gameState = appendTextAfter(gameState, "endRound()", " disabled")
-	gameState = appendTextAfter(gameState, "noCard()", " disabled")
+
 	
-	clickedCards = clickedGainCards.concat(clickedLossCards)
-	var notClicked = cardArray.filter(function(x) { return (jQuery.inArray(x,clickedCards) == -1)})
-	notClicked = jsPsych.randomization.shuffle(notClicked)
-	lossCardsToTurn = notClicked.slice(0,numLossCards-clickedLossCards.length)
-	gainCardsToTurn = notClicked.slice(numLossCards-clickedLossCards.length)
-	for (var i = 1; i < cardArray.length + 1; i++) {
-		if (clickedGainCards.indexOf(i) != -1 ) {
-			gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/chosen.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
-		} else if (clickedLossCards.indexOf(i) != -1 ) {
-			gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/loss.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
-		} else {
-			gameState = appendTextAfter2(gameState, "id = " + "" + i + ""," class = 'card_image' src='images/beforeChosen.png'", " class = 'card_image select-button' src='images/beforeChosen.png' onclick = chooseCard(this.id)")
-		}
-	}
-	
-	setTimeout(function() {
-		for (var k = 0; k < lossCardsToTurn.length; k++) {
-			document.getElementById('' + lossCardsToTurn[k] + '').src =
-			'images/loss.png';
-		}
-		for (var j = 0; j < gainCardsToTurn.length; j++) {
-			document.getElementById('' + gainCardsToTurn[j] + '').src =
-			"images/chosen.png";
-		}
-		$('#collectButton').prop('disabled', false)
-	}, 1500)
+
 //*/
   return gameState;
 };
@@ -732,7 +880,6 @@ for (i = 1; i < 33; i++) {
   cardPositions[i - 1] = Array(row * vspace, col * hspace);
 }
 
-console.log(cardPositions);
 
 var gameSetup =
   "<div class = cct-box>" +
@@ -949,7 +1096,7 @@ var test_block = {
 
 var pre_test_block = {
   type: "single-stim-button",
-  button_class: null,
+  button_class: "select-button",
   stimulus: getPreRound,
   is_html: true,
   data: {
@@ -957,13 +1104,35 @@ var pre_test_block = {
     exp_stage: "test",
   },
   timing_post_trial: 0,
-  timing_response: 0,
-  //on_finish: appendTestData,
-  response_ends_trial: false,
+ // timing_response: 0,
+  on_finish: appendTestData,
+  response_ends_trial: true,
 };
 
 var test_node = {
   timeline: [test_block],
+  loop_function: function (data) {
+    if (currID == "collectButton") {
+      roundPointsArray.push(roundPoints);
+      roundOver = 0;
+      roundPoints = 0;
+      whichClickInRound = 0;
+      whichRound = whichRound + 1;
+      round_type =
+        lossRounds.indexOf(whichRound) == -1 ? "rigged_win" : "rigged_loss";
+      if (round_type == "rigged_loss") {
+        whichLossCards = [riggedLossCards.shift()];
+      }
+      lossClicked = false;
+      return false;
+    } else {
+      return true;
+    }
+  },
+};
+
+var pre_test_node = {
+  timeline: [pre_test_block],
   loop_function: function (data) {
     if (currID == "collectButton") {
       roundPointsArray.push(roundPoints);
@@ -1019,8 +1188,8 @@ var columbia_card_task_hot_experiment = [];
 
 //columbia_card_task_hot_experiment.push(start_test_block);
 for (i = 0; i < numRounds; i++) {
-  columbia_card_task_hot_experiment.push(pre_test_block);
-  columbia_card_task_hot_experiment.push(test_node);
+ columbia_card_task_hot_experiment.push(pre_test_node);
+ //columbia_card_task_hot_experiment.push(test_node);
 }
 
 columbia_card_task_hot_experiment.push(payoutTrial);
