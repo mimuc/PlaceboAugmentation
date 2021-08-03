@@ -533,7 +533,7 @@ var getPreRound = function () {
       var carta = document.getElementById("F" + i);
       carta.src = "images/beforechosen.png";
     }
-  }, 500);
+  }, 1000);
 
   setTimeout(function () {
     var shuffled = cardPositions.slice();
@@ -547,7 +547,7 @@ var getPreRound = function () {
           cardcontainer.children[i].style.left = shuffled[i][1] + "vw";
         }
       },
-      200,
+      300,
       5
     );
 
@@ -558,8 +558,8 @@ var getPreRound = function () {
         cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
         cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
       }
-    }, 1000);
-  }, 1000);
+    }, 1500);
+  }, 1500);
 
   //////////////////////////////////////////////////////
   /* 
@@ -857,8 +857,8 @@ for (i = 1; i < 33; i++) {
   var columns = 8;
   var row = Math.floor((i - 1) / 8);
   var col = i - 1 - row * columns;
-  var hspace = 6;
-  var vspace = 6.5;
+  var hspace = 7.0;
+  var vspace = 9;
   cardPositions[i - 1] = Array(row * vspace, col * hspace);
 }
 
