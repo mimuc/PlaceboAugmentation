@@ -9,24 +9,29 @@
 }
 
 .block-text2 {
-  font-size: 89%;
+  font-size: 3vw;
   width: 100%;
-  height: 100vw;
+  /*height: 100vw;*/
   text-align: justify;
+  background-color: rgba(255, 255, 255, 0.9);
   margin: 0 auto;
   margin-bottom: 1em;
   line-height: 120%;
+  z-index: -5;
 }
 
 .practiceText {
   width: 85vw;
-  height: 10vw;
+  /*height: 10vw;*/
   position: absolute;
-  top: 1%;
-  left: 2.5%;
-  margin-right: 50%;
-  transform: translate(0%, 0%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 2;
+}
+
+#practice2{
+  transform: translate(-50%, 0%);
 }
 
 .cardbox {
@@ -51,13 +56,21 @@
 }
 
 .cct-box2 {
-  width: 87.5vw;
-  height: 78vh;
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0%;
   left: 0%;
   margin-right: 0%;
-  transform: translate(7%, 2.5%);
+  /*transform: translate(7%, 2.5%);*/
+}
+
+
+.botoncillo{
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  display: none;
 }
 
 .titleBigBox {
@@ -117,6 +130,7 @@
 .square .flip-card#flip {
   transform: rotateY(-180deg);
 }
+
 /*
 
 .card-front, .card-back{
@@ -134,52 +148,69 @@ background-color: blue;
 }
 */
 
+.cardpicture{
+  position: relative;
+  float: left;
+  width: auto;
+  height: inherit;
+  z-index: 1;
+}
+
 .titleboxLeft {
-  width: 16vw;
-  height: 2vw;
+  width: 15vw;
+  height: 4vw;
   position: absolute;
-  top: 10%;
-  left: 6%;
+  top: 2%;
+  left: 0%;
   margin-right: -50%;
   transform: translate(0%, 0%);
   border-style: solid;
-  border-color: black;
+  border-color: rgb(117, 117, 117);
+  border-radius: 30px;
+  border-width: thin;
 }
 
 .titleboxLeft1 {
   width: 15vw;
-  height: 2vw;
+  height: 4vw;
   position: absolute;
-  top: 40%;
-  left: 9%;
+  top: 50%;
+  left: 0%;
   margin-right: -50%;
   transform: translate(0%, 0%);
   border-style: solid;
-  border-color: black;
+  border-color: rgb(117, 117, 117);
+  border-radius: 30px;
+  border-width: thin;
 }
 
 .titleboxRight {
-  width: 16vw;
-  height: 2vw;
+  width: 15vw;
+  height: 4vw;
   position: absolute;
-  top: 10%;
-  left: 75%;
-  margin-right: -50%;
+  top: 2%;
+  right: 0%;
+  margin-right: 0%;
   transform: translate(0%, 0%);
   border-style: solid;
-  border-color: black;
+  border-color: rgb(117, 117, 117);
+  border-radius: 30px;
+  border-width: thin;
 }
 
 .titleboxRight1 {
   width: 15vw;
-  height: 2vw;
+  height: 4vw;
   position: absolute;
-  top: 40%;
-  left: 72%;
-  margin-right: -50%;
+  top: 50%;
+  right: 00%;
+  margin-right: -00%;
   transform: translate(0%, 0%);
   border-style: solid;
-  border-color: black;
+  border-color: rgb(117, 117, 117);
+  border-radius: 30px;
+  border-width: thin;
+  
 }
 
 .titlebox {
@@ -201,11 +232,13 @@ background-color: blue;
   margin-right: -50%;
   transform: translate(-50%, 0%);
   border-style: solid;
-  border-color: black;
+  border-color: rgb(117, 117, 117);
+  border-radius: 30px;
+  border-width: thin;
 }
 
 .buttonbox {
-  width: 32vw;
+  width: 60vw;
   height: 2vw;
   position: absolute;
   top: 65%;
@@ -218,13 +251,13 @@ background-color: blue;
 }
 
 .buttonbox2 {
-  width: 7vw;
-  height: 2vw;
+  width: 12vw;
+  height: 5vw;
   position: absolute;
-  top: 65%;
-  left: 65%;
-  margin-right: -50%;
-  transform: translate(45%, 0%);
+  bottom: 0%;
+  right:0%;
+  
+ 
   border-style: solid;
   border-color: white;
 }
@@ -247,6 +280,8 @@ background-color: blue;
   height: 100%;
   width: 32%;
 }
+
+
 
 .CCT-btn:hover {
   border-color: #999;

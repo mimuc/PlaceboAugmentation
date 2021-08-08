@@ -29,7 +29,7 @@
 $( document ).ready(function() {
     
     jsPsych.init({
-             timeline: columbia_card_task_hot_experiment,
+             timeline: columbia_card_task_hot_experiment_p2,
              display_element: "getDisplayElement",
              fullscreen: false,
              on_trial_finish: function(data){
@@ -47,27 +47,6 @@ $( document ).ready(function() {
                  promise.then(function(data) {
 
 
-                     $.ajax({
-                         type: "POST",
-                         url: '/save/almacenamiento.php',
-                         data: { "data": data },
-                         success: function(){ document.location = "/next";
-                        console.log("Dsdsdfsfexito")},
-                         dataType: "application/json",
-
-                         // Endpoint not running, local save
-                         error: function(err) {
-
-                             if (err.status == 200){
-                                console.log("Dsdsdfsfnoerr")
-                                 document.location = "/next";
-                             } else {
-                                 // If error, assue local save
-                                 console.log("Dsdsdfsferror")
-                                 jsPsych.data.localSave('columbia-card-task-hot_results.csv', 'csv');
-                             }
-                         }
-                     });
                  })
              }
 

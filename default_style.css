@@ -48,10 +48,10 @@ body {
   width: 50vw;
   height: 60vh;
   position:absolute;
-  top:50%;
+  /*top:50%;*/
   left:50%;
-  margin-right:-50%;
-  transform: translate(-50%,-50%);
+ /* margin-right:-50%;*/
+  transform: translate(-50%,0%);
 }
 
 
@@ -59,7 +59,7 @@ body {
 /* Used for general instructions */
 .block-text {
   width:100%;
-  height: 100vw;
+ /* height: 100vw;*/
   text-align: justify;
   margin: 0 auto;
   margin-bottom: 1em;
@@ -70,7 +70,7 @@ body {
 /* As above but centered instead of justified. Good for instructions with few lines */
 .center-block-text {
   width:100%;
-  height: 100vw;
+
   text-align: center;
   margin: 0 auto;
   margin-bottom: 1em;
@@ -130,7 +130,7 @@ Sample html: <div class = centerbox><div class = img-container><img...></img></d
 
 .jspsych-instructions-nav {
   text-align: center;
-  margin-top: 50px;
+  margin-bottom: 50px;
   position: relative;
   z-index: 1;
 }
