@@ -27,7 +27,15 @@
 
 <script>
 $( document ).ready(function() {
-    
+    var url_string = window.location.href;
+    var url = new URL(url_string);
+    var c = url.searchParams.get("condition");
+    var u = url.searchParams.get("userID");
+    if (u!=null | c!=null) {
+        console.log(c);
+        console.log(u);
+    }
+                    
     jsPsych.init({
              timeline: columbia_card_task_hot_experiment,
              display_element: "getDisplayElement",
@@ -45,25 +53,26 @@ $( document ).ready(function() {
                  })
 
                  promise.then(function(data) {
-
+                    
 
                      $.ajax({
                          type: "POST",
-                         url: '/save/almacenamiento.php',
-                         data: { "data": data },
-                         success: function(){ document.location = "/next";
-                        console.log("Dsdsdfsfexito")},
+                         url: '/cctexperiment/save/almacenamiento.php',
+                         data: {"condition": c, "userID": u, "data": data },
+                         //data: JSON.stringify(data),
+                         success: function(){ document.location = "/cctexperiment/end.html";
+                        },
                          dataType: "application/json",
 
                          // Endpoint not running, local save
                          error: function(err) {
 
                              if (err.status == 200){
-                                console.log("Dsdsdfsfnoerr")
-                                 document.location = "/next";
+                            
+                                 document.location = "/cctexperiment/end.html";
                              } else {
                                  // If error, assue local save
-                                 console.log("Dsdsdfsferror")
+                             
                                  jsPsych.data.localSave('columbia-card-task-hot_results.csv', 'csv');
                              }
                          }

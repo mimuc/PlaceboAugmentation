@@ -1,28 +1,18 @@
-<?php
-
-function debug_to_console($data) {
-    $output = $data;
-    if (is_array($output))
-        $output = implode(',', $output);
-
-    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
-}
-
-if (file_exists("log.txt")) {
-    $file = "log.txt";
-    $current = file_get_contents($file);
-} else {
-    $myfile = fopen("log.txt","w");
-    header("Refresh:0");
-}
+<?php 
 
 $comment = $_POST;
 
-$file = "log.txt";
+$pages = json_decode($comment["data"], true);
+$userID = json_decode($pages[0]["responses"]);
 
-file_put_contents($file, $comment);
+$file = $comment["userID"]."_".$comment["condition"].".json";
 
-debug_to_console($comment);
-header("/save/storedata.php")
+if (file_exists($file)) {
+    $myfile = $comment["userID"]."_".$comment["condition"]."_Repeated_".uniqid().".json";
+} else {
+    $myfile = $file;
+}
+
+file_put_contents($myfile, $comment["data"]);
 
 ?>

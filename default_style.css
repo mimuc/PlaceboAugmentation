@@ -70,11 +70,10 @@ body {
 /* As above but centered instead of justified. Good for instructions with few lines */
 .center-block-text {
   width:100%;
-
   text-align: center;
   margin: 0 auto;
   margin-bottom: 1em;
-  font-size: 26px;
+  font-size: 2vw;
   line-height: 120%;
 }
 

@@ -527,13 +527,16 @@ var getPreRound = function () {
       } else {
         carta.src = "images/chosen.png";
       }
-
+      
     }
 
     var items = document.getElementsByClassName("square");
     for (var i = 0; i < items.length; i++) {
       items[i].classList.remove("flipped");
+      var cartain = document.getElementById("" + (i+1) + "");
+      cartain.disabled = true;
     }
+
   }, 000);
 
   setTimeout(function () {
@@ -546,6 +549,7 @@ var getPreRound = function () {
       var carta = document.getElementById("F" + i);
       carta.src = "images/beforeChosen.png";
     }
+
   }, 1000);
 
   setTimeout(function () {
@@ -570,6 +574,8 @@ var getPreRound = function () {
       for (var i = 0; i < cardcontainer.children.length; i++) {
         cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
         cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
+        var cartain = document.getElementById("" + (i+1) + "");
+        cartain.disabled = false;
       }
     }, 1500);
   }, 1500);
@@ -910,11 +916,12 @@ var post_task_block = {
     trial_id: "post task questions"
   },
   questions: [
-    '<p class = center-block-text style = "font-size: 20px">Please summarize what you were asked to do in this task.</p>',
-    '<p class = center-block-text style = "font-size: 20px">Do you have any comments about this task?</p>'
+    '<p class = center-block-text >Please summarize what you were asked to do in this task.</p>',
+    '<p class = center-block-text >Do you have any comments about this task?</p>'
   ],
   rows: [15, 15],
-  columns: [60, 60]
+  columns: [60, 60],
+  on_finish: assessPerformance
 };
 
 var pre_task_block = {
@@ -923,7 +930,7 @@ var pre_task_block = {
     trial_id: "pre task questions"
   },
   questions: [
-    '<p class = center-block-text style = "font-size: 20px">Please introduce your prolific ID</p>'
+    '<p class = center-block-text>Please introduce your prolific ID</p>'
   ],
   rows: [15, 15],
   columns: [60, 60]
@@ -1093,14 +1100,15 @@ var instruction_node_2 = {
 
 var end_block = {
   type: "poldrack-text",
-  data: {
-    trial_id: "end",
-    exp_id: "columbia_card_task_hot"
-  },
-  text: "<div class = centerbox><p class = center-block-text>Finished with this task.</p><p class = center-block-text>Press <strong>enter</strong> to continue.</p></div>",
-  cont_key: [13],
-  timing_post_trial: 0,
-  on_finish: assessPerformance
+  //data: {
+  //  trial_id: "end",
+   // exp_id: "columbia_card_task_hot"
+  //},
+  text: "<div class = centerbox><p class = center-block-text>Finished with this task.</p></div>",
+  //cont_key: [13],
+  response_ends_trial: true,
+  timing_post_trial: 1000,
+  //on_finish: assessPerformance
 };
 
 var start_test_block = {
@@ -1274,8 +1282,8 @@ var columbia_card_task_hot_experiment = [];
 
 //columbia_card_task_hot_experiment.push(start_test_block);
 
-columbia_card_task_hot_experiment.push(pre_task_block);
-for (i = 0; i < 5; i++) {
+//columbia_card_task_hot_experiment.push(pre_task_block);
+for (i = 0; i < numRounds; i++) {
   columbia_card_task_hot_experiment.push(pre_test_node);
   //columbia_card_task_hot_experiment.push(test_node);
 }
@@ -1283,4 +1291,4 @@ for (i = 0; i < 5; i++) {
 //columbia_card_task_hot_experiment.push(payoutTrial);
 //columbia_card_task_hot_experiment.push(payout_text); // <-- This is to summarize the poins of the user
 columbia_card_task_hot_experiment.push(post_task_block); // <-- This is the input fields etc
-columbia_card_task_hot_experiment.push(end_block); // <-- This downloads the csv file
+//columbia_card_task_hot_experiment.push(end_block); // <-- This downloads the csv file
