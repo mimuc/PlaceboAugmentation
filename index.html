@@ -11,7 +11,6 @@
 
 <body>
 <script src='js/jquery.min.js'></script>
-<script src='js/rdmgrid.js'></script>
 <script src='js/math.min.js'></script>
 <script src='js/jspsych/jspsych.js'></script>
 <script src='js/jspsych/plugins/jspsych-text.js'></script>
@@ -31,10 +30,7 @@ $( document ).ready(function() {
     var url = new URL(url_string);
     var c = url.searchParams.get("condition");
     var u = url.searchParams.get("userID");
-    if (u!=null | c!=null) {
-        console.log(c);
-        console.log(u);
-    }
+
                     
     jsPsych.init({
              timeline: columbia_card_task_hot_experiment,

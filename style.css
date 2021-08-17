@@ -33,6 +33,27 @@
   transform: translate(-50%, 0%);
 }
 
+
+.loading {
+  height: auto;
+  width: 10vw;
+  position: absolute;
+  left: 5%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+  left: 50%;
+  z-index: 1;
+  opacity: 0.75;
+  transition: all ease 0.5s;
+}
+
+.loading.hidden{
+
+ opacity: 0;
+ z-index: -1;
+}
+
 .cardbox {
   width: 80vw;
   height: auto;
