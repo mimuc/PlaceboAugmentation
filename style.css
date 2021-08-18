@@ -34,7 +34,8 @@
 }
 
 
-.loading {
+.loading{
+  font-size: 3vw;
   height: auto;
   width: 10vw;
   position: absolute;
@@ -53,6 +54,25 @@
  opacity: 0;
  z-index: -1;
 }
+
+#taskWarning{
+  font-size: 2vw;
+  height: auto;
+  width: 15vw;
+  line-height: 1.9vw;
+  position: absolute;
+  right: 1%;
+ color: red;
+  bottom: 1%;
+
+
+  z-index: 1;
+  opacity: 1;
+  transition: all ease 0.5s;
+}
+
+
+
 
 .cardbox {
   width: 80vw;

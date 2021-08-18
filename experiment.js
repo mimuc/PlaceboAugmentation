@@ -380,7 +380,7 @@ var getPreRound = function () {
     gainAmt = roundParams[1];
     lossAmt = roundParams[2];
 
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
+    gameState = appendTextAfter(gameState, "Game Round: ", whichRound + " of " + numRounds);
     gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
@@ -393,13 +393,14 @@ var getPreRound = function () {
       "Number of Loss Cards: ",
       numLossCards
     );
+    gameState = appendTextAfter(gameState, "you still have", " " + (numRounds - whichRound+1)+ " rounds left");
     gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
     gameState = appendTextAfter(gameState, "endRound()", " disabled");
     roundOver = 1;
 
   } else if (roundOver == 1) {
     //this is for during the round
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
+    gameState = appendTextAfter(gameState, "Game Round: ", whichRound + " of " + numRounds);
     gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
@@ -412,6 +413,8 @@ var getPreRound = function () {
       "Number of Loss Cards: ",
       numLossCards
     );
+
+    gameState = appendTextAfter(gameState, "you still have", " " +  (numRounds - whichRound+1)+ " rounds left");
     gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
     gameState = appendTextAfter(gameState, "noCard()", " disabled");
     gameState = appendTextAfter2(
@@ -433,7 +436,7 @@ var getPreRound = function () {
   } else if (roundOver == 2) {
     //this is for end the round
     roundOver = 3;
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
+    gameState = appendTextAfter(gameState, "Game Round: ", whichRound  + " of " + numRounds);
     gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
@@ -446,6 +449,7 @@ var getPreRound = function () {
       "Number of Loss Cards: ",
       numLossCards
     );
+    gameState = appendTextAfter(gameState, "you still have", " " + (numRounds - whichRound+1)+ " rounds left");
     gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
     gameState = appendTextAfter2(
       gameState,
@@ -920,7 +924,7 @@ var gameSetup =
 var PregameSetup =
   "<div class = cct-box>" +
   "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>" +
-  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>" + "<img class='loading hidden' id=load src=images/soundload.gif>" +
+  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>" + "<img class='loading hidden' id=load src=images/soundload.gif>" + "<div id=taskWarning>you still have, <b>don't</b> press the 'I have finished' button  yet &#8595</div>" +
   getBoard(-1);
 
 var practiceSetup =
