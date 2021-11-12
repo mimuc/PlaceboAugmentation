@@ -543,7 +543,7 @@ var getPreRound = function () {
     }
 
     var load = document.getElementById("load");
-    load.classList.remove("hidden");
+    //load.classList.remove("hidden");
     if(c=="Augmentation")
     {
       load.src = "images/soundload2.gif"
@@ -924,7 +924,7 @@ var gameSetup =
 var PregameSetup =
   "<div class = cct-box>" +
   "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>" +
-  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>" + "<img class='loading hidden' id=load src=images/soundload.gif>" + "<div id=taskWarning>you still have, <b>don't</b> press the 'I have finished' button  yet &#8595</div>" +
+  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>" + "<img class='loading hidden' id=load src=images/soundload.gif>" + "<div id=taskWarning>you still have, <b>don't</b> press the button  yet &#8595</div>" +
   getBoard(-1);
 
 var practiceSetup =
@@ -949,8 +949,8 @@ var post_task_block = {
     trial_id: "post task questions"
   },
   questions: [
-    '<p class = center-block-text >Please summarize what you were asked to do in this task.</p>',
-    '<p class = center-block-text >Do you have any comments about this task?</p>'
+    "<p class = center-block-text >Please summarize what you were asked to do in this task.</p>",
+    "<p class = center-block-text >Do you have any comments about this task?</p> <div id=taskWarning> &#8592 Submit your answers first, <b>don't</b> press the 'I have finished' button  yet &#8595 </div>"
   ],
   rows: [15, 15],
   columns: [60, 60],
@@ -1267,7 +1267,6 @@ var columbia_card_task_hot_experiment = [];
 //columbia_card_task_hot_experiment.push(practice_block2);
 
 //columbia_card_task_hot_experiment.push(start_test_block);
-
 //columbia_card_task_hot_experiment.push(pre_task_block);
 for (i = 0; i < numRounds; i++) {
   columbia_card_task_hot_experiment.push(pre_test_node);

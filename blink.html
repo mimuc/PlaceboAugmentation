@@ -1,0 +1,100 @@
+<!DOCTYPE html><html class=''>
+<head>
+    <meta charset='UTF-8'>
+    <meta name="robots" content="noindex">
+    <title>Strobe</title>
+    
+<link rel='stylesheet' type='text/css' href='jspsych.css'>
+<link rel='stylesheet' type='text/css' href='default_style.css'>
+<link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+
+<body>
+<script src='js/jquery.min.js'></script>
+<script src='js/rdmgrid.js'></script>
+<script src='js/math.min.js'></script>
+
+
+<div class=loading>+</div>
+
+<div id="rave" class="off"></div>
+
+</body>
+
+
+
+
+</html>
+
+<style>
+
+    body{
+      background: rgb(255, 255, 255);
+    }
+    #rave{
+      background: rgb(0, 0, 0);
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    #raveBtn{
+      width: 200px;
+      height: 45px;
+      background: black;
+      margin: 0 auto;
+      border-radius: 10px;
+      font-family: arial;
+      font-weight: bold;
+      display: block;
+      cursor: pointer;
+      text-align: center;
+      padding-top: 15px;
+      top: 30px;
+      position: relative;
+    }
+    .on{
+      -webkit-animation: raveOn 1s infinite;
+    }
+    .off{
+      opacity: 0;
+    }
+    @-webkit-keyframes raveOn{
+      0%{
+        opacity: 1;
+      }
+      100%{
+        opacity: 0;
+      }
+    }
+
+    
+.loading{
+  font-size: 10vw;
+  height: auto;
+  width: 10vw;
+  color: white;
+  position: absolute;
+  left: 5%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+  left: 50%;
+  z-index: 1;
+  opacity: 0.75;
+  transition: all ease 0.5s;
+}
+    
+    </style>
+
+<script>
+
+$(function(){
+    if($("#rave").hasClass('off')){
+      $("#rave").addClass('on').removeClass('off');
+    }else{
+      $("#rave").removeClass('on').addClass('off');
+    }
+})
+</script>
