@@ -1,6 +1,21 @@
 /* ************************************ */
 /* Helper Functions                     */
 /* ************************************ */
+
+let socket = new WebSocket("ws://localhost:8765");
+var connectionStablished = false;
+socket.onopen = function(e) {
+  socket.send("0");
+  connectionStablished = true;
+};
+
+
+function sendTrigger(trigger) {
+  if (connectionStablished) {
+    socket.send(trigger);
+  }
+}
+
 var getInstructFeedback = function () {
   return (
     "<div class = centerbox><p class = center-block-text>" +
@@ -167,21 +182,25 @@ var collect = function () {
   }
   currID = "collectButton";
   whichClickInRound = whichClickInRound + 1;
+  sendTrigger("6")
 };
 
 var noCard = function () {
   currID = "noCardButton";
   roundOver = 2;
   whichClickInRound = whichClickInRound + 1;
+  sendTrigger("4")
 };
 
 var endRound = function () {
   currID = "endRoundButton";
   roundOver = 2;
+  sendTrigger("5")
 };
 
 // Clickable card function during test
 var chooseCard = function (clicked_id) {
+  
   currID = parseInt(clicked_id);
   whichClickInRound = whichClickInRound + 1;
   if (lossRounds.indexOf(whichRound) == -1) {
@@ -191,6 +210,7 @@ var chooseCard = function (clicked_id) {
       unclickedCards.splice(index, 1); //delete from unclicked
       roundPoints = roundPoints - lossAmt;
       lossClicked = true;
+      sendTrigger("3")
       roundOver = 2;
     } else {
       // if you click on a gain card
@@ -198,6 +218,7 @@ var chooseCard = function (clicked_id) {
       index = unclickedCards.indexOf(currID, 0);
       unclickedCards.splice(index, 1);
       roundPoints = roundPoints + gainAmt;
+      sendTrigger("2")
     }
   } else {
     if (clickedGainCards.length + 1 == whichLossCards) {
@@ -206,6 +227,7 @@ var chooseCard = function (clicked_id) {
       unclickedCards.splice(index, 1);
       roundPoints = roundPoints - lossAmt;
       lossClicked = true;
+      sendTrigger("3")
       roundOver = 2;
     } else {
       // if you click on a gain card
@@ -213,8 +235,11 @@ var chooseCard = function (clicked_id) {
       index = unclickedCards.indexOf(currID, 0);
       unclickedCards.splice(index, 1);
       roundPoints = roundPoints + gainAmt;
+      sendTrigger("2")
     }
   }
+  console.log("CLICKED THIS SHEET: "+ currID + " Loss?: "+ lossClicked+" Round Points: "+roundPoints+" Loss Amount: "+ lossAmt + "Gain Amount: " + gainAmt );
+  
 };
 
 var getRound = function () {
@@ -397,6 +422,7 @@ var getPreRound = function () {
     gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
     gameState = appendTextAfter(gameState, "endRound()", " disabled");
     roundOver = 1;
+    
 
   } else if (roundOver == 1) {
     //this is for during the round
@@ -635,6 +661,7 @@ function setIntervalX(callback, delay, repetitions) {
 /*Functions below are for practice
  */
 var turnCards = function (cards) {
+  
   $("#collectButton").prop("disabled", false);
   $("#NoCardButton").prop("disabled", true);
   for (i = 0; i < 33; i++) {
