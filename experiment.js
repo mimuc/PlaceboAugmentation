@@ -4,7 +4,7 @@
 
 let socket = new WebSocket("ws://localhost:8765");
 var connectionStablished = false;
-socket.onopen = function(e) {
+socket.onopen = function (e) {
   socket.send("0");
   connectionStablished = true;
 };
@@ -175,7 +175,7 @@ var appendTestData = function () {
   });
 };
 
-// Functions for "top" buttons during test (no card, end round, collect)
+// Functions for "top" buttons during test (Keine Karte, end round, collect)
 var collect = function () {
   for (var i = 0; i < CCT_timeouts.length; i++) {
     clearTimeout(CCT_timeouts[i]);
@@ -200,7 +200,7 @@ var endRound = function () {
 
 // Clickable card function during test
 var chooseCard = function (clicked_id) {
-  
+
   currID = parseInt(clicked_id);
   whichClickInRound = whichClickInRound + 1;
   if (lossRounds.indexOf(whichRound) == -1) {
@@ -238,8 +238,8 @@ var chooseCard = function (clicked_id) {
       sendTrigger("2")
     }
   }
-  console.log("CLICKED THIS SHEET: "+ currID + " Loss?: "+ lossClicked+" Round Points: "+roundPoints+" Loss Amount: "+ lossAmt + "Gain Amount: " + gainAmt );
-  
+  console.log("CLICKED THIS SHEET: " + currID + " Loss?: " + lossClicked + " Round Points: " + roundPoints + " Verlustmenge: " + lossAmt + "Gewinnmenge: " + gainAmt);
+
 };
 
 var getRound = function () {
@@ -260,39 +260,39 @@ var getRound = function () {
     gainAmt = roundParams[1];
     lossAmt = roundParams[2];
 
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
-    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter(gameState, "Spielrunde: ", whichRound);
+    gameState = appendTextAfter(gameState, "Verlustmenge: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
-      "Current Round Points: ",
+      "Aktuelle Rundenpunktzahl: ",
       roundPoints,
       "0"
     );
     gameState = appendTextAfter(
       gameState,
-      "Number of Loss Cards: ",
+      "Anzahl der Verlierkarten: ",
       numLossCards
     );
-    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "Gewinnmenge: ", gainAmt);
     gameState = appendTextAfter(gameState, "endRound()", " disabled");
     roundOver = 1;
     return gameState;
   } else if (roundOver == 1) {
     //this is for during the round
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
-    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter(gameState, "Spielrunde: ", whichRound);
+    gameState = appendTextAfter(gameState, "Verlustmenge: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
-      "Current Round Points: ",
+      "Aktuelle Rundenpunktzahl: ",
       roundPoints,
       "0"
     );
     gameState = appendTextAfter(
       gameState,
-      "Number of Loss Cards: ",
+      "Anzahl der Verlierkarten: ",
       numLossCards
     );
-    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "Gewinnmenge: ", gainAmt);
     gameState = appendTextAfter(gameState, "noCard()", " disabled");
     gameState = appendTextAfter2(
       gameState,
@@ -312,20 +312,20 @@ var getRound = function () {
   } else if (roundOver == 2) {
     //this is for end the round
     roundOver = 3;
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound);
-    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter(gameState, "Spielrunde: ", whichRound);
+    gameState = appendTextAfter(gameState, "Verlustmenge: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
-      "Current Round Points: ",
+      "Aktuelle Rundenpunktzahl: ",
       roundPoints,
       "0"
     );
     gameState = appendTextAfter(
       gameState,
-      "Number of Loss Cards: ",
+      "Anzahl der Verlierkarten: ",
       numLossCards
     );
-    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "Gewinnmenge: ", gainAmt);
     gameState = appendTextAfter2(
       gameState,
       "id = collectButton class = 'CCT-btn",
@@ -405,43 +405,43 @@ var getPreRound = function () {
     gainAmt = roundParams[1];
     lossAmt = roundParams[2];
 
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound + " of " + numRounds);
-    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter(gameState, "Spielrunde: ", whichRound + " of " + numRounds);
+    gameState = appendTextAfter(gameState, "Verlustmenge: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
-      "Current Round Points: ",
+      "Aktuelle Rundenpunktzahl: ",
       roundPoints,
       "0"
     );
     gameState = appendTextAfter(
       gameState,
-      "Number of Loss Cards: ",
+      "Anzahl der Verlierkarten: ",
       numLossCards
     );
-    gameState = appendTextAfter(gameState, "you still have", " " + (numRounds - whichRound+1)+ " rounds left");
-    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "Es sind noch ", " " + (numRounds - whichRound + 1) + " Runden übrig");
+    gameState = appendTextAfter(gameState, "Gewinnmenge: ", gainAmt);
     gameState = appendTextAfter(gameState, "endRound()", " disabled");
     roundOver = 1;
-    
+
 
   } else if (roundOver == 1) {
     //this is for during the round
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound + " of " + numRounds);
-    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter(gameState, "Spielrunde: ", whichRound + " of " + numRounds);
+    gameState = appendTextAfter(gameState, "Verlustmenge: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
-      "Current Round Points: ",
+      "Aktuelle Rundenpunktzahl: ",
       roundPoints,
       "0"
     );
     gameState = appendTextAfter(
       gameState,
-      "Number of Loss Cards: ",
+      "Anzahl der Verlierkarten: ",
       numLossCards
     );
 
-    gameState = appendTextAfter(gameState, "you still have", " " +  (numRounds - whichRound+1)+ " rounds left");
-    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "Es sind noch ", " " + (numRounds - whichRound + 1) + " Runden übrig");
+    gameState = appendTextAfter(gameState, "Gewinnmenge: ", gainAmt);
     gameState = appendTextAfter(gameState, "noCard()", " disabled");
     gameState = appendTextAfter2(
       gameState,
@@ -462,21 +462,21 @@ var getPreRound = function () {
   } else if (roundOver == 2) {
     //this is for end the round
     roundOver = 3;
-    gameState = appendTextAfter(gameState, "Game Round: ", whichRound  + " of " + numRounds);
-    gameState = appendTextAfter(gameState, "Loss Amount: ", lossAmt);
+    gameState = appendTextAfter(gameState, "Spielrunde: ", whichRound + " of " + numRounds);
+    gameState = appendTextAfter(gameState, "Verlustmenge: ", lossAmt);
     gameState = appendTextAfter2(
       gameState,
-      "Current Round Points: ",
+      "Aktuelle Rundenpunktzahl: ",
       roundPoints,
       "0"
     );
     gameState = appendTextAfter(
       gameState,
-      "Number of Loss Cards: ",
+      "Anzahl der Verlierkarten: ",
       numLossCards
     );
-    gameState = appendTextAfter(gameState, "you still have", " " + (numRounds - whichRound+1)+ " rounds left");
-    gameState = appendTextAfter(gameState, "Gain Amount: ", gainAmt);
+    gameState = appendTextAfter(gameState, "Es sind noch ", " " + (numRounds - whichRound + 1) + " Runden übrig");
+    gameState = appendTextAfter(gameState, "Gewinnmenge: ", gainAmt);
     gameState = appendTextAfter2(
       gameState,
       "id = collectButton class = 'CCT-btn",
@@ -532,7 +532,7 @@ var getPreRound = function () {
       }
       var colbut = document.getElementById("collectButton");
       colbut.disabled = false;
-      
+
     }, 1500);
 
     return gameState;
@@ -558,23 +558,22 @@ var getPreRound = function () {
       } else {
         carta.src = "images/chosen.png";
       }
-      
+
     }
 
     var items = document.getElementsByClassName("square");
     for (var i = 0; i < items.length; i++) {
       items[i].classList.remove("flipped");
-      var cartain = document.getElementById("" + (i+1) + "");
+      var cartain = document.getElementById("" + (i + 1) + "");
       cartain.disabled = true;
     }
 
     var load = document.getElementById("load");
     //load.classList.remove("hidden");
-    if(c=="Augmentation")
-    {
+    if (c == "Augmentation") {
       load.src = "images/soundload2.gif"
     }
-    else{
+    else {
       load.src = "images/load.gif"
     }
     //  "
@@ -606,7 +605,7 @@ var getPreRound = function () {
           cardcontainer.children[i].style.left = shuffled[i][1] + "vw";
         }
       },
-      300,
+      480,
       5
     );
 
@@ -616,7 +615,7 @@ var getPreRound = function () {
       for (var i = 0; i < cardcontainer.children.length; i++) {
         cardcontainer.children[i].style.top = cardPositions[i][0] + "vw";
         cardcontainer.children[i].style.left = cardPositions[i][1] + "vw";
-        var cartain = document.getElementById("" + (i+1) + "");
+        var cartain = document.getElementById("" + (i + 1) + "");
         cartain.disabled = false;
       }
 
@@ -624,9 +623,9 @@ var getPreRound = function () {
       var load = document.getElementById("load");
       load.classList.add("hidden");
 
-    }, 1500);
+    }, 3000);
 
-   
+
   }, 1500);
 
   //////////////////////////////////////////////////////
@@ -661,7 +660,7 @@ function setIntervalX(callback, delay, repetitions) {
 /*Functions below are for practice
  */
 var turnCards = function (cards) {
-  
+
   $("#collectButton").prop("disabled", false);
   $("#NoCardButton").prop("disabled", true);
   for (i = 0; i < 33; i++) {
@@ -686,7 +685,7 @@ function doSetTimeout(card_i, delay, points, win) {
     setTimeout(function () {
       turnOneCard(card_i, win);
       document.getElementById("current_round").innerHTML =
-        "Current Round Points: " + points;
+        "Aktuelle Rundenpunktzahl: " + points;
     }, delay)
   );
 }
@@ -736,8 +735,8 @@ var getPractice2 = function () {
 };
 
 var url_string = window.location.href;
-    var url = new URL(url_string);
-    var c = url.searchParams.get("condition");
+var url = new URL(url_string);
+var c = url.searchParams.get("condition");
 
 /*Functions below are for instruction
  */
@@ -749,7 +748,7 @@ var instructCard = function (clicked_id) {
   if (whichLossCards.indexOf(currID) == -1) {
     instructPoints = instructPoints + gainAmt;
     document.getElementById("current_round").innerHTML =
-      "Current Round Points: " + instructPoints;
+      "Aktuelle Rundenpunktzahl: " + instructPoints;
     document.getElementById(clicked_id).disabled = true;
 
     document.getElementById(clicked_id).src = "images/chosen.png";
@@ -757,7 +756,7 @@ var instructCard = function (clicked_id) {
     instructPoints = instructPoints - lossAmt;
     document.getElementById(clicked_id).disabled = true;
     document.getElementById("current_round").innerHTML =
-      "Current Round Points: " + instructPoints;
+      "Aktuelle Rundenpunktzahl: " + instructPoints;
     document.getElementById(clicked_id).src = "images/loss.png";
     $("input.card_image").attr("disabled", true);
     CCT_timeouts.push(
@@ -795,7 +794,7 @@ var instructFunction = function () {
   CCT_timeouts.push(
     setTimeout(function () {
       document.getElementById("instruct1").innerHTML =
-        '<font color = "red">Luckily, none of the seven cards you turned over happened to be the loss card, so your score for this round was 70. Please click the next button.</font>';
+        '<font color = "red">Glücklicherweise war keine der sieben aufgedeckten Karten die Verlustkarte, so dass Sie für diese Runde 70 Punkte erhalten haben. Bitte klicken Sie auf die Schaltfläche "Next".</font>';
     }, delay)
   );
 };
@@ -842,8 +841,8 @@ var instructFunction2 = function () {
   CCT_timeouts.push(
     setTimeout(function () {
       document.getElementById("instruct2").innerHTML =
-        '<font color = "red">This time, the fourth card you turned over was a loss card. As you saw, the round will immediately end when you turn over the loss card. You had earned 90 points for the 3 gain cards, and then 250 points were subtracted for the loss card, so your score for this round was -160. After the loss points were subtracted from your Round Total, the computer also showed you the cards that you had not yet turned over. Please click the next button.</font>';
-    }, (delay+1000))
+        '<font color = "red">Dieses Mal war die vierte aufgedeckte Karte eine Verlustkarte. Wie Sie gesehen haben, endet die Runde sofort, wenn Sie die Verlustkarte aufdecken. Sie hatten 90 Punkte mit den 3 Gewinnkarten erzielt, dann wurden 250 Punkte für die Verlustkarte abgezogen, so dass Ihr Ergebnis für diese Runde -160 ist. Nachdem die Verlustpunkte von der Gesamtsumme der Runde abgezogen wurden, zeigt Ihnen der Computer auch die Karten an, die Sie noch nicht aufgedeckt haben. Bitte klicken Sie auf die Schaltfläche "Next".</font>';
+    }, (delay + 1000))
   );
   CCT_timeouts.push(setTimeout(instructTurnCards, delay + 1000));
 };
@@ -868,11 +867,11 @@ var numLossCards = "";
 var gainAmt = "";
 var lossAmt = "";
 var CCT_timeouts = [];
-var numWinRounds = 16;
-var numLossRounds = 4;
+var numWinRounds = 13;
+var numLossRounds = 7;
 var numRounds = numWinRounds + numLossRounds;
 var lossRounds = jsPsych.randomization.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]).slice(0, numLossRounds);
-lossRounds.sort(function(a,b) { return a - b; } )
+lossRounds.sort(function (a, b) { return a - b; })
 
 
 var riggedLossCards = [];
@@ -893,7 +892,7 @@ var prize1 = 0;
 var prize2 = 0;
 var prize3 = 0;
 
-// this params array is organized such that the 0 index = the number of loss cards in round, the 1 index = the gain amount of each happy card, and the 2nd index = the loss amount when you turn over a sad face
+// this params array is organized such that the 0 index = the Anzahl der Verlierkarten in round, the 1 index = the Gewinnmenge of each happy card, and the 2nd index = the Verlustmenge when you turn over a sad face
 var paramsArray = [
   [1, 10, 250],
   [1, 10, 750],
@@ -919,13 +918,13 @@ var shuffledParamsArray = jsPsych.randomization.repeat(
 
 for (var i = 0; i < numLossRounds; i++) {
   riggedLossCards.push(Math.floor(Math.random() * 10) + 2);
-  
-  var before = shuffledParamsArray.slice(0, lossRounds[i]-1);
-  var after = shuffledParamsArray.slice(lossRounds[i]-1);
+
+  var before = shuffledParamsArray.slice(0, lossRounds[i] - 1);
+  var after = shuffledParamsArray.slice(lossRounds[i] - 1);
   //var insert = [[0,0,0]];
   var insert = [paramsArray[Math.floor(Math.random() * 8)]];
   shuffledParamsArray = before.concat(insert, after);
-  
+
   //shuffledParamsArray.splice
 }
 
@@ -944,26 +943,26 @@ for (i = 1; i < 33; i++) {
 
 var gameSetup =
   "<div class = cct-box>" +
-  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Current Round Points: 0</div></div>" +
-  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>" +
+  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Spielrunde: </div></div>   <div class = titleboxLeft1><div class = center-text id = loss_amount>Verlustmenge: </div></div>    <div class = titleboxMiddle1><div class = center-text id = gain_amount>Gewinnmenge: </div></div>    <div class = titlebox><div class = center-text>Wie viele Karten möchten Sie aufdecken? </div></div>     <div class = titleboxRight1><div class = center-text id = num_loss_cards>Anzahl der Verlierkarten: </div></div>   <div class = titleboxRight><div class = center-text id = current_round>Aktuelle Rundenpunktzahl: 0</div></div>" +
+  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Keine Karte</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Umdrehen</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Nächste Runde</button></div></div>" +
   getBoard();
 
 var PregameSetup =
   "<div class = cct-box>" +
-  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: </div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: </div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: </div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: </div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>" +
-  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>No Card</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Turn Over</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Next Round</button></div></div>" + "<img class='loading hidden' id=load src=images/soundload.gif>" + "<div id=taskWarning>you still have, <b>don't</b> press the button  yet &#8595</div>" +
+  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Spielrunde: </div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Verlustmenge: </div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gewinnmenge: </div></div>    <div class = titlebox><div class = center-text>Wie viele Karten möchten Sie aufdecken? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Anzahl der Verlierkarten: </div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Aktuelle Rundenpunktzahl: 0</div></div>" +
+  "<div class = buttonbox><button type='button' id = NoCardButton class = 'CCT-btn select-button' onclick = noCard()>Keine Karte</button><button type='button' id = turnButton class = 'CCT-btn select-button' onclick = endRound()>STOP/Umdrehen</button><button type='button' id = collectButton class = 'CCT-btn' disabled>Nächste Runde</button></div></div>" + "<img class='loading hidden' id=load src=images/soundload.gif>" + "<div id=taskWarning>Es sind noch </div>" +
   getBoard(-1);
 
 var practiceSetup =
   "<div class = cct-box2>" +
-  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>"  +
-  "<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button></div></div>" +
+  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Spielrunde: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Verlustmenge: 250</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gewinnmenge: 30</div></div>    <div class = titlebox><div class = center-text>Wie viele Karten möchten Sie aufdecken? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Anzahl der Verlierkarten: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Aktuelle Rundenpunktzahl: 0</div></div>" +
+  "<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Keine Karte</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Umdrehen</button></div></div>" +
   getBoard(2);
 
 var practiceSetup2 =
   "<div class = cct-box2>" +
-  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>"  +
-  "<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>No Card</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Turn Over</button></div></div>" + 
+  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Spielrunde: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Verlustmenge: 750</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gewinnmenge: 10</div></div>    <div class = titlebox><div class = center-text>Wie viele Karten möchten Sie aufdecken? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Anzahl der Verlierkarten: 3</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Aktuelle Rundenpunktzahl: 0</div></div>" +
+  "<div class = buttonbox><button type='button' class = CCT-btn id = NoCardButton onclick = turnCards()>Keine Karte</button><button type='button' class = CCT-btn id = turnButton onclick = turnCards() disabled>STOP/Umdrehen</button></div></div>" +
   getBoard(2);
 
 /* ************************************ */
@@ -1016,13 +1015,13 @@ var feedback_instruct_block = {
 var instructions_block_1 = {
   type: "poldrack-instructions",
   data: { trial_id: "instruction" },
-  pages: [ "<div class = practiceText><div class = block-text2 id = instruct1></div></div>" +
-      "<div class = cct-box2>"
-      +"<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: 750</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: 10</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>" +
-      "<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>" +
-      "</div>" +
-      getBoard(2)+"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>See Result</button></div><div class = botoncillo ></div>"]
-      ,
+  pages: ["<div class = practiceText><div class = block-text2 id = instruct1></div></div>" +
+    "<div class = cct-box2>"
+    + "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Spielrunde: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Verlustmenge: 750</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gewinnmenge: 10</div></div>    <div class = titlebox><div class = center-text>Wie viele Karten möchten Sie nehmen? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Anzahl der Verlierkarten: 1</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Aktuelle Rundenpunktzahl: 0</div></div>" +
+    "<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>Keine Karte</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Umdrehen</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Nächste Runde</button></div>" +
+    "</div>" +
+    getBoard(2) + "<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction()>Ergebnis sehen</button></div><div class = botoncillo ></div>"]
+  ,
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -1032,13 +1031,13 @@ var instructions_block_1 = {
 var instructions_block_2 = {
   type: "poldrack-instructions",
   data: { trial_id: "instruction" },
-  pages: [ "<div class = practiceText id=practice2><div class = block-text2 id = instruct2></div></div>" +
-  "<div class = cct-box2>" +
-  "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Game Round: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Loss Amount: 250</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gain Amount: 30</div></div>    <div class = titlebox><div class = center-text>How many cards do you want to take? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Number of Loss Cards: 3</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Current Round Points: 0</div></div>"  +
-  "<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>No Card</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Turn Over</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Next Round</button></div>" +
-  "</div>" +
-  getBoard(2)+"<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>See Result</button></div><div class = botoncillo ></div>"]
-      ,
+  pages: ["<div class = practiceText id=practice2><div class = block-text2 id = instruct2></div></div>" +
+    "<div class = cct-box2>" +
+    "<div class = titleBigBox>   <div class = titleboxLeft><div class = center-text id = game_round>Spielrunde: 1</div></div>   <div class = titleboxRight><img src = 'images/loss.png' class = cardpicture><div class = center-text id = loss_amount>Verlustmenge: 250</div></div>    <div class = titleboxRight1><img src = 'images/chosen.png' class = cardpicture><div class = center-text id = gain_amount>Gewinnmenge: 30</div></div>    <div class = titlebox><div class = center-text>Wie viele Karten möchten Sie nehmen? </div></div>     <div class = titleboxMiddle1><div class = center-text id = num_loss_cards>Anzahl der Verlierkarten: 3</div></div>   <div class = titleboxLeft1><div class = center-text id = current_round>Aktuelle Rundenpunktzahl: 0</div></div>" +
+    "<div class = buttonbox><button type='button' class = 'CCT-btn select-button' id = NoCardButton disabled>Keine Karte</button><button type='button' class = 'CCT-btn select-button' class = 'CCT-btn select-button' id = turnButton disabled>STOP/Umdrehen</button><button type='button' class = 'CCT-btn select-button' id = collectButton  disabled>Nächste Runde</button></div>" +
+    "</div>" +
+    getBoard(2) + "<div class = buttonbox2><button type='button' class = CCT-btn id = instructButton onclick= instructFunction2()>Ergebnis sehen</button></div><div class = botoncillo ></div>"]
+  ,
   allow_keys: false,
   show_clickable_nav: true,
   timing_post_trial: 1000
@@ -1115,7 +1114,7 @@ var end_block = {
   type: "poldrack-text",
   //data: {
   //  trial_id: "end",
-   // exp_id: "columbia_card_task_hot"
+  // exp_id: "columbia_card_task_hot"
   //},
   text: "<div class = centerbox><p class = center-block-text>Finished with this task.</p></div>",
   //cont_key: [13],

@@ -29,12 +29,12 @@
   z-index: 2;
 }
 
-#practice2{
+#practice2 {
   transform: translate(-50%, 0%);
 }
 
 
-.loading{
+.loading {
   font-size: 3vw;
   height: auto;
   width: 10vw;
@@ -49,20 +49,20 @@
   transition: all ease 0.5s;
 }
 
-.loading.hidden{
+.loading.hidden {
 
- opacity: 0;
- z-index: -1;
+  opacity: 0;
+  z-index: -1;
 }
 
-#taskWarning{
+#taskWarning {
   font-size: 2vw;
   height: auto;
   width: 15vw;
   line-height: 1.9vw;
   position: absolute;
   right: 1%;
- color: rgb(0, 0, 0);
+  color: rgb(0, 0, 0);
   bottom: 1%;
 
 
@@ -82,7 +82,7 @@
   left: 50%;
   margin-right: 50%;
   transform: translate(-38%, 0%);
-  background-color: white;
+  background-color: lightgreen;
 }
 
 .cct-box {
@@ -106,7 +106,7 @@
 }
 
 
-.botoncillo{
+.botoncillo {
   bottom: 0;
   right: 0;
   position: absolute;
@@ -121,7 +121,7 @@
   left: 0%;
   margin-right: 0%;
   transform: translate(0%, 0%);
-  background-color: white;
+  background-color: lightgreen;
 }
 
 .square {
@@ -129,10 +129,11 @@
   position: absolute;
   width: 8%;
   height: 9vw;
-  padding-bottom: 0%; /* = width for a 1:1 aspect ratio */
+  padding-bottom: 0%;
+  /* = width for a 1:1 aspect ratio */
   margin: 1%;
   overflow: hidden;
-  color: #fff;
+  color: lightgreen;
 
   display: inline-block;
   background: transparent;
@@ -188,7 +189,7 @@ background-color: blue;
 }
 */
 
-.cardpicture{
+.cardpicture {
   position: relative;
   float: left;
   width: auto;
@@ -250,7 +251,7 @@ background-color: blue;
   border-color: rgb(117, 117, 117);
   border-radius: 30px;
   border-width: thin;
-  
+
 }
 
 .titlebox {
@@ -286,8 +287,8 @@ background-color: blue;
   margin-right: -50%;
   transform: translate(-50%, 0%);
   border-style: solid;
-  border-color: white;
-  
+  border-color: lightgreen;
+
 }
 
 .buttonbox2 {
@@ -295,9 +296,9 @@ background-color: blue;
   height: 5vw;
   position: absolute;
   bottom: 0%;
-  right:0%;
-  
- 
+  right: 0%;
+
+
   border-style: solid;
   border-color: white;
 }
@@ -336,7 +337,7 @@ background-color: blue;
   width: 100%;
 }
 
-.grid > * {
+.grid>* {
   padding: 10px;
 }
 
