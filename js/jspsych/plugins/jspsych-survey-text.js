@@ -9,11 +9,11 @@
  */
 
 
-jsPsych.plugins['survey-text'] = (function() {
+jsPsych.plugins['survey-text'] = (function () {
 
   var plugin = {};
 
-  plugin.trial = function(display_element, trial) {
+  plugin.trial = function (display_element, trial) {
 
     trial.preamble = typeof trial.preamble == 'undefined' ? "" : trial.preamble;
     if (typeof trial.rows == 'undefined') {
@@ -62,15 +62,15 @@ jsPsych.plugins['survey-text'] = (function() {
       'id': 'jspsych-survey-text-next',
       'class': 'jspsych-btn jspsych-survey-text'
     }));
-    $("#jspsych-survey-text-next").html('Submit Answers');
-    $("#jspsych-survey-text-next").click(function() {
+    $("#jspsych-survey-text-next").html('Antwort abschicken');
+    $("#jspsych-survey-text-next").click(function () {
       // measure response time
       var endTime = (new Date()).getTime();
       var response_time = endTime - startTime;
 
       // create object to hold responses
       var question_data = {};
-      $("div.jspsych-survey-text-question").each(function(index) {
+      $("div.jspsych-survey-text-question").each(function (index) {
         var id = "Q" + index;
         var val = $(this).children('textarea').val();
         var obje = {};

@@ -144,9 +144,9 @@ var getBoard = function (board_type) {
 
 var getText = function () {
   return (
-    "<div class = centerbox><p class = block-text>Overall, you earned " +
+    "<div class = centerbox><p class = block-text>Insgesamt haben Sie " +
     totalPoints +
-    " points. These are the points used for your bonus from three randomly picked trials:  " +
+    " Punkte erreicht. Die Punkte für Ihren Bonus aus drei zufällig ausgewählten Testläufen beträgt:  " +
     "<ul list-text><li>" +
     prize1 +
     "</li><li>" +
@@ -154,7 +154,7 @@ var getText = function () {
     "</li><li>" +
     prize3 +
     "</li></ul>" +
-    "</p><p class = block-text>Press <strong>enter</strong> to continue.</p></div>"
+    "</p><p class = block-text>Drücken Sie <strong>Enter</strong> um Fortzufragen.</p></div>"
   );
 };
 
@@ -975,8 +975,8 @@ var post_task_block = {
     trial_id: "post task questions"
   },
   questions: [
-    "<p class = center-block-text >Please summarize what you were asked to do in this task.</p>",
-    "<p class = center-block-text >Do you have any comments about this task?</p> <div id=taskWarning> &#8592 Submit your answers first, <b>don't</b> press the 'I have finished' button  yet &#8595 </div>"
+    "<p class = center-block-text >Fassen Sie bitte zusammen was Ihre Aufgabe war.</p>",
+    "<p class = center-block-text >Haben Sie zusätzliche Kommentare zur Aufgabe??</p>"
   ],
   rows: [15, 15],
   columns: [60, 60],
@@ -989,7 +989,7 @@ var pre_task_block = {
     trial_id: "pre task questions"
   },
   questions: [
-    '<p class = center-block-text>Please introduce your prolific ID</p>'
+    '<p class = center-block-text>Bitte geben Sie Ihre Identifikationsnummer an</p>'
   ],
   rows: [15, 15],
   columns: [60, 60]
@@ -1293,7 +1293,7 @@ var columbia_card_task_hot_experiment = [];
 //columbia_card_task_hot_experiment.push(practice_block2);
 
 //columbia_card_task_hot_experiment.push(start_test_block);
-//columbia_card_task_hot_experiment.push(pre_task_block);
+columbia_card_task_hot_experiment.push(pre_task_block);
 for (i = 0; i < numRounds; i++) {
   columbia_card_task_hot_experiment.push(pre_test_node);
   //columbia_card_task_hot_experiment.push(test_node);
@@ -1302,4 +1302,4 @@ for (i = 0; i < numRounds; i++) {
 //columbia_card_task_hot_experiment.push(payoutTrial);
 //columbia_card_task_hot_experiment.push(payout_text); // <-- This is to summarize the poins of the user
 columbia_card_task_hot_experiment.push(post_task_block); // <-- This is the input fields etc
-//columbia_card_task_hot_experiment.push(end_block); // <-- This downloads the csv file
+columbia_card_task_hot_experiment.push(end_block); // <-- This downloads the csv file
